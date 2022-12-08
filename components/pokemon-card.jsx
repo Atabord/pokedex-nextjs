@@ -5,9 +5,9 @@ import styles from '../styles/pokemon-card.module.css'
 export default function PokemonCard({ info }) {
     const spriteSRC = info.sprites.other?.home?.front_default ?? info.sprites.front_default;
     return (
-        <Link href={`/pokemon/${info.id}`}>
+        <Link href={`/pokemon/${info.id}`} className={styles['poke-card__link']}>
             <div className={styles['pokemon-card']}>
-                <Image 
+                <Image
                     src={spriteSRC}
                     alt={`${info.name}-image`}
                     height="200"

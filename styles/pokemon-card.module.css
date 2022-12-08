@@ -5,3 +5,7 @@
     border-radius: 10px;
     align-items: center;
 }
+
+.poke-card__link {
+    flex-grow: 1;
+}
