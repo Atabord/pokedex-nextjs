@@ -5,7 +5,13 @@ import Layout from '../../components/layout';
 import styles from '../../styles/pokemon.module.css';
 
 export default function Pokemon({ pokemon }) {
-  const spriteSRC = pokemon?.sprites?.other?.home?.front_default ?? pokemon?.sprites?.front_default;
+  if(!pokemon || typeof pokemon !== 'object') {
+    return null;
+  }
+  
+  const spriteSRC = pokemon.sprites?.other?.home?.front_default 
+    ?? pokemon.sprites?.other?.['official-artwork']?.front_default
+    ?? '';
 
   return (
     <Layout>
@@ -38,8 +44,8 @@ export async function getStaticPaths() {
   const pokemons = await (await fetch('https://pokeapi.co/api/v2/pokemon?limit=1154')).json();
   const pokemonList = pokemons.results.reduce(
     (total, pokemon, i) => [
-      ...total, 
-      { params: { id: i + '' } }, 
+      ...total,
+      { params: { id: i + '' } },
       { params: { id: pokemon.name } }
     ],
     []);
